@@ -1,4 +1,4 @@
-package util
+package strings
 
 import (
 	"fmt"
@@ -7,6 +7,46 @@ import (
 	"strings"
 	"unsafe"
 )
+
+func SqlUrlCheck(sqlUrl string) bool {
+	var sqlStrs = []string{"drop", "delete", "update", "insert", "create", "set", "grant", "shutdown", "stop", "sleep", "alert", "truncate", "remove", "revoke"}
+	lowerSqlUrl := strings.ToLower(sqlUrl)
+	if !strings.HasPrefix(lowerSqlUrl, "select") {
+		log.Error(3, "lowerSqlUrl not Contains:%s err", "select")
+		return false
+	}
+
+	//将lowerSqlUrl中的“,” “.” “;” “=” “>” “<” “'”变为" "
+	lowerSqlUrl = strings.Map(Slash, lowerSqlUrl)
+	//以空格切割字符串，变为字符串数组
+	ss := strings.SplitN(lowerSqlUrl, " ", -1)
+	log.Info("lowerSqlUrl  Contains:%s ", ss)
+	for _, s := range ss {
+		if strings.EqualFold(s, "") {
+			continue
+		}
+		log.Info("lowerSqlUrl  Contains:%s ", s)
+		for _, str := range sqlStrs {
+			if strings.EqualFold(s, str) {
+				log.Error(3, "lowerSqlUrl Contains:%s err", str)
+				return false
+			}
+		}
+	}
+
+	return true
+}
+
+//替换字符串,将","替换成空格
+func Slash(r rune) rune {
+	var ss = []rune{',', '.', ';', '\'', '`', '=', '>', '<', '(', ')'}
+	for _, s := range ss {
+		if r == s {
+			return ' '
+		}
+	}
+	return r
+}
 
 func StringsFallback2(val1 string, val2 string) string {
 	if val1 != "" {
