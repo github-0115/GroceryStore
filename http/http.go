@@ -30,6 +30,7 @@ func GetClassMoldsData(dataSourceId string, ip string, tenantId string, classLay
 	res, err := GetRequest(u.String())
 	if err != nil {
 		fmt.Println(" get %s Molds res err %s", classCode, err.Error())
+
 		return "", err
 	}
 
@@ -40,6 +41,7 @@ func GetRequest(url string) (string, error) {
 	if !strings.Contains(url, "http://") {
 		url = "http://" + url
 	}
+
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
 		fmt.Println("get url :%s request err:%s", url, err.Error())
