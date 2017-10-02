@@ -1,0 +1,1 @@
+[xorm] [info]  2017/06/17 14:53:20.526083 [SQL] select count(*) from `inner_data_resource`
