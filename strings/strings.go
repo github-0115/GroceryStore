@@ -48,6 +48,23 @@ func Slash(r rune) rune {
 	return r
 }
 
+func InterfaceToString(i interface{}) string {
+
+	b, err := json.Marshal(i)
+	if err != nil {
+		log.Error(3, "interface to string err:%s", err.Error())
+		return ""
+	}
+
+	f3, err := strconv.ParseFloat(string(b), 64)
+	if err != nil {
+		log.Error(3, "string %s to float err:%s", string(b), err.Error())
+		return ""
+	}
+
+	return strconv.FormatFloat(f3, 'f', 3, 64)
+}
+
 func StringsFallback2(val1 string, val2 string) string {
 	if val1 != "" {
 		return val1
@@ -169,4 +186,14 @@ func BytesToString(b []byte) string {
 	bh := (*reflect.SliceHeader)(unsafe.Pointer(&b))
 	sh := reflect.StringHeader{bh.Data, bh.Len}
 	return *(*string)(unsafe.Pointer(&sh))
+}
+
+func str2bytes(s string) []byte {
+	x := (*[2]uintptr)(unsafe.Pointer(&s))
+	h := [3]uintptr{x[0], x[1], x[1]}
+	return *(*[]byte)(unsafe.Pointer(&h))
+}
+
+func bytes2str(b []byte) string {
+	return *(*string)(unsafe.Pointer(&b))
 }

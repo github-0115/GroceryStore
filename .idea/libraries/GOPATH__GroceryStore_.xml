@@ -1,0 +1,33 @@
+<component name="libraryTable">
+  <library name="GOPATH &lt;GroceryStore&gt;">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../ManageCenter" />
+      <root url="file://$PROJECT_DIR$/../github.com" />
+      <root url="file://$PROJECT_DIR$/../golang.org" />
+      <root url="file://$PROJECT_DIR$/../sftp" />
+      <root url="file://$PROJECT_DIR$/../demo" />
+      <root url="file://$PROJECT_DIR$/../simulate" />
+      <root url="file://$PROJECT_DIR$/../sourcegraph.com" />
+      <root url="file://$PROJECT_DIR$/../qiniupkg.com" />
+      <root url="file://$PROJECT_DIR$/../show" />
+      <root url="file://$PROJECT_DIR$/../SkyEyesManager" />
+      <root url="file://$PROJECT_DIR$/../gopkg.in" />
+    </CLASSES>
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/../ManageCenter" />
+      <root url="file://$PROJECT_DIR$/../github.com" />
+      <root url="file://$PROJECT_DIR$/../golang.org" />
+      <root url="file://$PROJECT_DIR$/../sftp" />
+      <root url="file://$PROJECT_DIR$/../demo" />
+      <root url="file://$PROJECT_DIR$/../simulate" />
+      <root url="file://$PROJECT_DIR$/../sourcegraph.com" />
+      <root url="file://$PROJECT_DIR$/../qiniupkg.com" />
+      <root url="file://$PROJECT_DIR$/../show" />
+      <root url="file://$PROJECT_DIR$/../SkyEyesManager" />
+      <root url="file://$PROJECT_DIR$/../gopkg.in" />
+    </SOURCES>
+    <excluded>
+      <root url="file://$PROJECT_DIR$" />
+    </excluded>
+  </library>
+</component>

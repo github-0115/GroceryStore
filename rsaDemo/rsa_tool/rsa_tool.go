@@ -3,7 +3,7 @@ package rsa_tool
 import (
 	"crypto/rand"
 	"crypto/rsa"
-	"crypto/sha1"
+	"crypto/sha256"
 	"crypto/x509"
 	"encoding/base64"
 	"encoding/pem"
@@ -232,7 +232,7 @@ func DecryptPKCS1v15(priKey *rsa.PrivateKey, ciphertext []byte) []byte {
  */
 func EncryptOAEP(pubKey *rsa.PublicKey, msg []byte) []byte {
 
-	encryptOAEP, err := rsa.EncryptOAEP(sha1.New(), rand.Reader, pubKey, msg, nil)
+	encryptOAEP, err := rsa.EncryptOAEP(sha256.New(), rand.Reader, pubKey, msg, nil)
 	if err != nil {
 		fmt.Println("rsa EncryptOAEP err:%s", err.Error())
 		return nil
@@ -250,7 +250,7 @@ func EncryptOAEP(pubKey *rsa.PublicKey, msg []byte) []byte {
  */
 func DecryptOAEP(priKey *rsa.PrivateKey, ciphertext []byte) []byte {
 
-	decryptOAEP, err := rsa.DecryptOAEP(sha1.New(), rand.Reader, priKey, ciphertext, nil)
+	decryptOAEP, err := rsa.DecryptOAEP(sha256.New(), rand.Reader, priKey, ciphertext, nil)
 	if err != nil {
 		fmt.Println("rsa DecryptOAEP err:%s", err.Error())
 		return nil
