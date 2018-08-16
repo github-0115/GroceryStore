@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"math/big"
 	"math/rand"
 	"strconv"
 	"time"
@@ -72,9 +73,9 @@ func Test10Base() {
 	indexs := zuheResult(n, m)
 	result := findNumsByIndexs(nums, indexs)
 	timeEnd := time.Now()
-	fmt.Println("indexs:", indexs)
+	//	fmt.Println("indexs:", indexs)
 	fmt.Println("count:", len(result))
-	fmt.Println("result:", result)
+	//	fmt.Println("result:", result)
 	r := rand.New(rand.NewSource(time.Now().UnixNano()))
 	index := r.Intn(len(result))
 	fmt.Println("%d result:", index, result[index])
@@ -90,6 +91,12 @@ func Test10Base() {
 	res := FindInterfacesByIndexs(Getmaps(), indexs[index])
 	fmt.Println("result:", res)
 	fmt.Println(index, "result:", res)
+	count := big.NewInt(10)
+	fmt.Println("big count:", count.Quo(count, big.NewInt(3)))
+	fmt.Println("big count:", count.Rem(count, big.NewInt(3)))
+	//	fmt.Println("big count:", count.QuoRem(count, big.NewInt(3), big.NewInt(3)))
+	fmt.Println("big count:", count.Div(count, big.NewInt(4)))
+	fmt.Println("mathZuhe:", mathZuhebig(1000, 100))
 }
 
 func Getmaps() []map[string]interface{} {
@@ -229,8 +236,33 @@ func mathZuhe(n int, m int) int {
 //阶乘
 func jieCheng(n int) int {
 	result := 1
-	for i := 2; i <= n; i++ {
+	for i := 1; i <= n; i++ {
 		result *= i
+	}
+
+	return result
+}
+
+//数学方法计算组合数(从n中取m个数)
+func mathZuhebig(n int64, m int64) int64 {
+	jn := jieChengbig(n)
+	jm := jieChengbig(m)
+
+	jn = jn.Quo(jn, jm)
+	jnm := jieChengbig(n - m)
+	jn = jn.Quo(jn, jnm)
+	fmt.Println(jn)
+	return jn.Int64()
+}
+
+//阶乘
+func jieChengbig(n int64) *big.Int {
+	var (
+		result       = big.NewInt(1)
+		i      int64 = 2
+	)
+	for i = 1; i <= n; i++ {
+		result.Mul(result, big.NewInt(i))
 	}
 
 	return result
